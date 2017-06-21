@@ -1,0 +1,64 @@
+<ion-header >
+    <ion-navbar color="primary">
+        <!--    <ion-navbar color="secondary">-->
+        <!--        <div class="img-round">-->
+        <!--</div>-->
+        <ion-item color="primary" >
+            <ion-avatar item-left>
+                <img  src="assets/img/avatar-ts-woody.png">
+            </ion-avatar>
+            <h2>Marty McFly</h2>
+        </ion-item>
+        <ion-buttons right>
+            <button ion-button icon-only color="royal" (click)="presentPopover($event)">
+                <ion-icon name="more"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="chat-background-image">
+    <div full-height class="chat-background-opacy">
+        <!--    <ion-list>
+                <ion-item>
+                    <h2>Woody</h2>
+                    <p>This town ain't big enough for the two of us!</p>
+                    <ion-note item-end>3:43 pm</ion-note>
+                </ion-item>
+        
+                <ion-item>
+                    <h2>Buzz Lightyear</h2>
+                    <p>My eyeballs could have been sucked from their sockets!</p>
+                    <ion-note item-end>1:12 pm</ion-note>
+                </ion-item>
+                <ion-item>
+                    <ion-card no-padding-left>
+        
+                        <ion-card-header>
+                            Buzz Lightyea
+                        </ion-card-header>
+        
+                        <ion-card-content>
+                            My eyeballs couldockets!...
+                            <ion-note float-right item-end>1:12 pm</ion-note>
+                        </ion-card-content>
+        
+                    </ion-card>
+                </ion-item>
+            </ion-list>-->
+
+        <div class="message message-left">
+            <div class="person-name">Woody</div>
+            <p  >This town ain't big enoughnoughnoughnoughnough noughnoughnoug noughnough</p>
+            <ion-note  >3:43 pm</ion-note>
+
+        </div>
+        <div class="message message-right">
+            <div class="person-name">Woody</div>
+            <p  >This town ain't big enoughnoughnoughnoughnough noughnoughnoug noughnough</p>
+            <ion-note  >3:43 pm</ion-note>
+
+        </div>
+
+    </div>
+</ion-content>

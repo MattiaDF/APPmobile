@@ -1,0 +1,24 @@
+page-home {
+
+    .list-avatar-page {
+        ion-note {
+            font-size: 12px;
+            align-self: flex-start;
+            margin-top: 14px;
+        }
+    }
+
+    .item-md ion-avatar{
+        img{
+            border-radius: 25%;
+        }
+    }
+
+    ion-item{
+        ion-badge{
+            position: absolute;
+            right: 15px;
+            top: 50%;
+        }
+    }
+}

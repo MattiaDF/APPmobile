@@ -1,0 +1,125 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+/*.text-center {
+    text-align: center;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.flex-container {
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    contain: strict;
+    .flex-item {
+        width: 100%;
+        display: flex;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        contain: content;
+    }
+}*/
+
+.back-button {
+    margin-left: -5px !important;
+    margin-right: 0 !important;
+}
+
+.main-background-image {
+    background: url('../assets/img/sfondo2.png') no-repeat center center fixed;
+    /*background-size: contain;*/
+    background-size: cover;
+    top:0;
+    /*    background-image: url('../assets/img/sfondo2.png');
+    /*background-size: cover;*/
+}
+.chat-background-image {
+    background: url('../assets/img/sfondoChat.jpg') no-repeat center center fixed;
+    /*background-size: contain;*/
+    background-size: cover;
+    top:0;
+    /*    background-image: url('../assets/img/sfondo2.png');
+    /*background-size: cover;*/
+}
+
+.chat-background-opacy{
+    background-color: rgba(255,255,255,0.3);
+    height: 100%;
+}
+
+/*.text-input:focus{
+    .logo-container {
+        text-align: center;
+
+        img {
+            width: 100%;
+            max-width: 180px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+    }
+
+}*/
+
+/*La mia form stilizzata*/
+.my-form {
+
+
+    color: white !important;
+
+
+    ion-list { 
+        margin-bottom: 0px !important;
+        ion-item {
+            border: hidden !important;
+            border-radius: 10px;
+            margin-bottom: 15px !important;
+            background-color: rgba(255,255,255,0.7);
+            ion-input {
+                .item-inner {
+                    border: hidden !important;
+                    border-bottom-color: #000;
+                    box-shadow: inset 0 -1px 0 0 #32db64;
+                }
+            }
+        }
+    }
+
+    .buttons-container {
+        button[round] {
+            background-color: #F57A32;
+            height: 45px !important;
+            font-size: 16px !important;
+            margin-bottom: 15px;
+            border-radius: 10px;
+        }
+
+        button[clear] {
+            font-size: 9px !important;
+            color: white !important;
+            text-transform: none;
+            text-decoration: none        }
+    }
+}
