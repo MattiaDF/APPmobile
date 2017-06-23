@@ -1,34 +1,49 @@
 page-chat {
+    ion-navbar{
+        ion-item {
+            padding-left: 0 !important;
+            ion-avatar{
+                margin-right: 10px !important;
+                min-height: 30px !important;
+                min-width: 30px !important;
+                img{
+                    height: 30px !important;
+                    width: 30px !important;
+                    border-radius: 25% !important;
+                }
 
-    ion-item {
-        padding-left: 0 !important;
-        .item-inner{
-            border-bottom: hidden !important;
-        }
-        ion-avatar{
-            img{
-                border-radius: 25% !important;
             }
 
         }
+    }
+    .item-inner{
+        margin-left: 0 !important;
+        border-bottom: hidden !important;
+        box-shadow: none !important;
+    }
 
+    ion-col{
+        padding-bottom: 0 !important;
+        padding-top: 0 !important;
+        padding-left: 10 !important;
+        padding-right: 10 !important;
     }
 
     .message{
         max-width: 80%;
         height: auto;
-        background-color: white;
         border-radius: 5px;
-        /*        margin-left: 10px;
-                margin-right: 10px;*/
-        margin: 10px;
+        margin-top: 10px;
         padding: 5px;
         position: relative;
+        display:block;
 
-        .person-name{
-            font-size: 14px;
-
-            margin: 0 5px 3px 5px;
+        .message-content{
+            .person-name{
+                font-size: 14px;
+                /*margin: 0 5px 3px 5px;*/
+                width: auto;
+            }
 
         }
 
@@ -45,19 +60,91 @@ page-chat {
         }
 
     }
+
     .message-left{
+        background-color: white;
         float: left;
     }
 
     .message-right{
+        background-color: #a0efdc;
         float: right;
-        /*background-colo r: #C2C2C2;*/
-        /*background-color: map-get($colors, "primary");*/
-        /*color: map-get($colors, "light");*/
-
+        ion-note{
+            color: map-get($colors,'light');
+        }
     }
 
 
+    .scroll-content {
+        padding-bottom:0!important;
+        margin-bottom: 58px !important;
+    }
+
+    ion-footer{
+
+        ion-toolbar{
+            padding: 0 !important;
+            min-height: 58px;
+            .fixed-bottom{
+
+                .item-inner{
+                    min-height: 15px !important;
+                    ion-icon{
+                        /*vertical-align: bottom !important;*/
+
+                    }
+                }
+
+                ion-list{
+                    padding: 0 10px;
+                    width: calc(100% - 55px);
+                    margin-bottom: 5px !important;
+                    margin-top: 0 !important;
+
+                    ion-item{
+                        ion-label{
+                            margin-top: 0 !important;
+                            margin-bottom: 0 !important;
+                            margin-left: 5px !important;
+                            margin-right: 5px !important;
+
+                            textarea{
+                                /*min-height: 14px !important;*/
+                                overflow: auto !important;
+                                max-height: 6.5em;
+                                line-height: 1.1em;
+                                font-size: 1.2em;
+                                margin: 0 5px !important;
+                                border: hidden !important;
+                                padding: 0 5px !important;
+                                width: 100%;
+                            }
+                        }
+                    }
+
+                    .ion-item-input{
+                        color: map-get($colors, 'dark');
+                        border-radius:25px;
+                    }
+
+                    .ion-item-mic{
+                        width: 45px;
+                        height: 45px;
+                        position: absolute;
+                        right: 10px;
+                        bottom: 7px;
+                        border-radius: 50%;
+                        padding: 0;
+                        margin: 0 !important;
+                        border: hidden !important;
+                        background-color: map-get($colors, 'primary');
+
+                    }
+                }
+            }
+        }
+
+    }
 
 
 }
