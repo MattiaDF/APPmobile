@@ -48,20 +48,20 @@
 }
 
 .main-background-image {
-    background: url('../assets/img/sfondo2.png') no-repeat center center fixed;
-    /*background-size: contain;*/
+    /*background: url('../assets/img/sfondo2.png') no-repeat center center fixed;*/
+    background: url('../assets/img/sfondo4.jpg') no-repeat;
     background-size: cover;
-    top:0;
-    /*    background-image: url('../assets/img/sfondo2.png');
-    /*background-size: cover;*/
+    /*background-size: 100% auto;*/
+    background-position: 0 0;
 }
 .chat-background-image {
-    background: url('../assets/img/sfondoChat.jpg') no-repeat center center fixed;
-    /*background-size: contain;*/
-    background-size: cover;
-    top:0;
-    /*    background-image: url('../assets/img/sfondo2.png');
+    background: url('../assets/img/sfondo_chat3.jpg') no-repeat center center fixed;
+
+
+    /*background: url('../assets/img/sfondo_chat.jpg') no-repeat center center fixed;*/
+    background-size: 100% auto;
     /*background-size: cover;*/
+    background-position: 0 0;
 }
 
 .chat-background-opacy{
