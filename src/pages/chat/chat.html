@@ -7,10 +7,10 @@
             <h2>Marty McFly</h2>
         </ion-item>
         <ion-buttons right>
-            <button ion-button icon-only color="royal" (click)="presentPopover($event)">
+            <button ion-button icon-only color="royal" (click)="presentPopoverAttach($event)">
                 <ion-icon name="attach"></ion-icon>
             </button>
-            <button ion-button icon-only color="royal" (click)="presentPopover($event)">
+            <button ion-button icon-only color="royal" (click)="presentPopoverMore($event)">
                 <ion-icon name="more"></ion-icon>
             </button>
         </ion-buttons>
@@ -218,8 +218,8 @@
                         <!--<ion-input type="text" placeholder="Scrivi un messaggio"></ion-input>-->
                         <ion-icon name="arrow-forward" item-right color="primary"></ion-icon>
                     </ion-item>
-                    <ion-item class="ion-item-mic">
-                        <ion-icon name="mic"  item-right color="light"></ion-icon>
+                    <ion-item  class="ion-item-mic">
+                        <ion-icon name="mic" (press)="recordingAudio()" item-right color="light"></ion-icon>
                     </ion-item>
                 </ion-list>
             </div>
