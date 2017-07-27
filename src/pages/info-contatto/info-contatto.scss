@@ -7,8 +7,8 @@ page-info-contatto {
         overflow-x: scroll;
         height: 82px;
         white-space: nowrap;
-        margin-left: 10px;
-        margin-right: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
     }
     ion-list{
         ion-list-header {
@@ -19,9 +19,7 @@ page-info-contatto {
 
     .top-content{
         margin-top:0px !important;
-        h2{
-            color:#6a6a6a !important;
-        }
+  
     }
     .shadow-background{
         margin-top:10px;

@@ -1,6 +1,5 @@
-page-info-gruppo {
-
-    .content-md{
+page-nome-gruppo {
+   .content-md{
         background-color: #d6d6da;
     }
 
@@ -29,6 +28,7 @@ page-info-gruppo {
         box-shadow: 0px 3px 6px #ccc !important;
         overflow: auto;
         zoom: 1;
+        position:relative;
 
 
         .header-label{

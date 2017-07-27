@@ -2,32 +2,27 @@ import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
 
 /**
- * Generated class for the InfoGruppoPage page.
+ * Generated class for the ImpUtentePage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
 @IonicPage()
 @Component({
-    selector: 'page-info-gruppo',
-    templateUrl: 'info-gruppo.html',
+    selector: 'page-imp-utente',
+    templateUrl: 'imp-utente.html',
 })
-export class InfoGruppoPage {
+export class ImpUtentePage {
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad InfoGruppoPage');
+        console.log('ionViewDidLoad ImpUtentePage');
     }
-
-    navToInfoContatto() {
-        this.navCtrl.push("InfoContattoPage");
-    }
-
     editName() {
         this.alertCtrl.create({
-            title: "Modifica nome gruppo",
+            title: "Modifica nome utente",
             inputs: [{
                 name: "name",
                 type: "text"
@@ -44,5 +39,4 @@ export class InfoGruppoPage {
             }]
         }).present();
     }
-
 }
