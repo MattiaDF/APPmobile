@@ -1,7 +1,15 @@
-import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
-import {MediaCapture, MediaFile, CaptureError, CaptureImageOptions, CaptureAudioOptions} from '@ionic-native/media-capture';
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, NavController, NavParams, Content} from 'ionic-angular';
 import {PopoverController} from 'ionic-angular';
+//import {MediaPlugin, MediaObject} from '@ionic-native/media';
+//import {File} from '@ionic-native/file';
+
+//Models
+import {Message} from '../../models/message.model';
+
+//Providers
+import {AudioProvider} from '../../providers/audio/audio';
+
 
 /**
  * Generated class for the ChatPage page.
@@ -16,44 +24,108 @@ import {PopoverController} from 'ionic-angular';
 })
 export class ChatPage {
 
-    constructor(public navCtrl: NavController, 
-        public navParams: NavParams, 
-        private mediaCapture: MediaCapture,
-        public popoverCtrl: PopoverController
-        ) {
+    messages: Array<Message> = [];
+    message: String = "";
+//    audio: MediaObject = null;
+//    private tmp_voice: Voice;
+
+    @ViewChild(Content) content: Content;
+
+    constructor(public navCtrl: NavController,
+        public navParams: NavParams,
+        public popoverCtrl: PopoverController,
+        private sAudio: AudioProvider,
+//        private media: MediaPlugin,
+//        private file: File,
+    ) {
+        let mm = {'id': 1, 'sender': 'Mario Mennella', 'body': 'ciaiicaiciachaich cihiachaichi hcaihaichai', 'type': 'text', 'created_at': '3:45 PM'};
+        for (let i = 0, max = 10; i < max; i++) {
+            this.messages.push(new Message(mm));
+        }
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad ChatPage');
     }
 
-    test(){
-        console.log("fujnziona0");
+    recordigStart() {
+        console.log("recording start");
+//        this.tmp_voice = new Voice();
+//        this.tmp_voice.nameFile = 'prova.mp3';
+//        this.tmp_voice.seek = 0;
+        this.sAudio.recordigStart('prova.mp3');
     }
-    
-    recordingAudio(){
-        let options: CaptureAudioOptions = {limit: 1};
-        //        let options: CaptureAudioOptions = {limit: 1};
-        this.mediaCapture.captureAudio(options)
-            .then(
-            (data: MediaFile[]) => console.log(data),
-            (err: CaptureError) => console.error(err)
-            );
+
+    recordigEnd() {
+//        console.log("recording end");
+//        this.audio.stopRecord();
+//        this.tmp_voice.duration = this.sAudio.recordigEnd();
+        let audioM = new Message();
+        audioM.id = 11;
+        audioM.sender = "Mennella Mario";
+        audioM.type = "audio";
+        audioM.created_at = "12:45 PM";
+//        audioM.media = this.tmp_voice;
+        this.messages.push(audioM);
     }
-    
-    
+
+    play(message: Message) {
+//        console.log(message);
+////        this.audio.play();
+//        this.sAudio.play(message.media);
+//        while (message.media.seek <= 100){
+//            console.log(message.media.seek);
+//        }
+    }
+
+//    recordingAudio() {
+//
+//        console.log("sto registr        ando");
+//        this.file.createFile("file:///storage/emulated/0/QuickChat", 'myfile.mp3', true).then((result: any) => {
+//            console.log(this.file, result);
+//            let file: MediaObject = this.media.create("file:///storage/emulated/0/QuickChat" + "/" + "myaudio.mp3");
+//            console.log(file);
+//            file.startRecord();
+//            window.setTimeout(() => {
+//                file.stopRecord();
+//                console.log("finito");
+//                file.play();
+//            }
+//                , 5000);
+//        });
+//
+//    }
+
+
+
+
     presentPopoverAttach($event: any) {
         let popover = this.popoverCtrl.create('PopOverAttachPage');
         popover.present({
             ev: $event
         });
     }
-    
+
     presentPopoverMore($event: any) {
         let popover = this.popoverCtrl.create('PopOverHomePage');
         popover.present({
             ev: $event
         });
+    }
+
+    send() {
+        console.log(this.message);
+        let mm = {'id': 1, 'sender': 'Mario Mennella', 'body': this.message, 'type': 'text', 'created_at': '3:45 PM'};
+        this.messages.push(new Message(mm));
+        this.message = "";
+        window.setTimeout(() => {
+            this.content.scrollToBottom();
+        }
+            , 300);
+    }
+
+    ionViewDidEnter() {
+        this.content.scrollToBottom();
     }
 
 }
