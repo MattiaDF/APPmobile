@@ -16,22 +16,22 @@ import {PopoverController} from 'ionic-angular';
 })
 export class ChatPage {
 
-    constructor(public navCtrl: NavController, 
-        public navParams: NavParams, 
+    constructor(public navCtrl: NavController,
+        public navParams: NavParams,
         private mediaCapture: MediaCapture,
         public popoverCtrl: PopoverController
-        ) {
+    ) {
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad ChatPage');
     }
 
-    test(){
+    test() {
         console.log("fujnziona0");
     }
-    
-    recordingAudio(){
+
+    recordingAudio() {
         let options: CaptureAudioOptions = {limit: 1};
         //        let options: CaptureAudioOptions = {limit: 1};
         this.mediaCapture.captureAudio(options)
@@ -40,20 +40,22 @@ export class ChatPage {
             (err: CaptureError) => console.error(err)
             );
     }
-    
-    
+
+
     presentPopoverAttach($event: any) {
         let popover = this.popoverCtrl.create('PopOverAttachPage');
         popover.present({
             ev: $event
         });
     }
-    
+
     presentPopoverMore($event: any) {
         let popover = this.popoverCtrl.create('PopOverHomePage');
         popover.present({
             ev: $event
         });
     }
-
+    navToInfoContatto() {
+        this.navCtrl.push("InfoContattoPage");
+    }
 }
