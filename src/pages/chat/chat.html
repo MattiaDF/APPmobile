@@ -23,184 +23,36 @@
             <ion-col>
                 <div class="message message-left">
                     <div class="message-content">
-
                         <div class="person-name">Woody</div>
-                        <p  >ghnoug noughnough ciao che fai io sto a casa a studiare!!</p>
+                        <ion-range [(ngModel)]="brightness">
+                            <ion-icon range-left name="play" (click)="play()"></ion-icon>
+                        </ion-range>
                     </div>
                     <ion-note  >3:43 pm</ion-note>
                 </div>
             </ion-col>
         </ion-row>
-        <ion-row>
-            <ion-col>
-                <div class="message message-right">
-                    <div class="message-content">
-                        <div class="person-name">Woody</div>
-                        <p  > ghnoug noughnough</p>
+        <ion-row  *ngFor="let message of messages">
+            <ion-col *ngIf="message.type != 'audio'">
+                <div class="message message-right" >
+                    <div class="message-content" >
+                        <div class="person-name">{{ message.sender }}</div>
+                        <p  > {{ message.body }}</p>
                     </div>
-                    <ion-note  >3:43 pm</ion-note>
+                    <ion-note  >{{ message.created_at }}</ion-note>
                 </div>
             </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
+            <ion-col *ngIf="message.type == 'audio'">
                 <div class="message message-left">
                     <div class="message-content">
-
-                        <div class="person-name">Woody</div>
-                        <p  >ghnoug noughnough ciao che fai io sto a casa a studiare!!</p>
+                        <div class="person-name">{{ message.sender }}</div>
+<!--                        <ion-range [(ngModel)]="message.media.seek">
+                            <ion-icon range-left name="play" (click)="play(message)"></ion-icon>
+                        </ion-range>-->
+                        <audiocomponent [voice]="message.media" ></audiocomponent>
                     </div>
-                    <ion-note  >3:43 pm</ion-note>
+                    <ion-note  >{{ message.created_at }}</ion-note>
                 </div>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <div class="message message-right">
-                    <div class="message-content">
-                        <div class="person-name">Woody</div>
-                        <p  > ghnoug noughnough</p>
-                    </div>
-                    <ion-note  >3:43 pm</ion-note>
-                </div>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <div class="message message-left">
-                    <div class="message-content">
-
-                        <div class="person-name">Woody</div>
-                        <p  >ghnoug noughnough ciao che fai io sto a casa a studiare!!</p>
-                    </div>
-                    <ion-note  >3:43 pm</ion-note>
-                </div>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <div class="message message-right">
-                    <div class="message-content">
-                        <div class="person-name">Woody</div>
-                        <p  > ghnoug noughnough</p>
-                    </div>
-                    <ion-note  >3:43 pm</ion-note>
-                </div>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <div class="message message-left">
-                    <div class="message-content">
-
-                        <div class="person-name">Woody</div>
-                        <p  >ghnoug noughnough ciao che fai io sto a casa a studiare!!</p>
-                    </div>
-                    <ion-note  >3:43 pm</ion-note>
-                </div>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <div class="message message-right">
-                    <div class="message-content">
-                        <div class="person-name">Woody</div>
-                        <p  > ghnoug noughnough</p>
-                    </div>
-                    <ion-note  >3:43 pm</ion-note>
-                </div>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <div class="message message-left">
-                    <div class="message-content">
-
-                        <div class="person-name">Woody</div>
-                        <p  >ghnoug noughnough ciao che fai io sto a casa a studiare!!</p>
-                    </div>
-                    <ion-note  >3:43 pm</ion-note>
-                </div>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <div class="message message-right">
-                    <div class="message-content">
-                        <div class="person-name">Woody</div>
-                        <p  > ghnoug noughnough</p>
-                    </div>
-                    <ion-note  >3:43 pm</ion-note>
-                </div>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <div class="message message-left">
-                    <div class="message-content">
-
-                        <div class="person-name">Woody</div>
-                        <p  >ghnoug noughnough ciao che fai io sto a casa a studiare!!</p>
-                    </div>
-                    <ion-note  >3:43 pm</ion-note>
-                </div>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <div class="message message-right">
-                    <div class="message-content">
-                        <div class="person-name">Woody</div>
-                        <p  > ghnoug noughnough</p>
-                    </div>
-                    <ion-note  >3:43 pm</ion-note>
-                </div>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <div class="message message-left">
-                    <div class="message-content">
-
-                        <div class="person-name">Woody</div>
-                        <p  >ghnoug noughnough ciao che fai io sto a casa a studiare!!</p>
-                    </div>
-                    <ion-note  >3:43 pm</ion-note>
-                </div>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <div class="message message-right">
-                    <div class="message-content">
-                        <div class="person-name">Woody</div>
-                        <p  > ghnoug noughnough</p>
-                    </div>
-                    <ion-note  >3:43 pm</ion-note>
-                </div>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                    <div class="message message-left">
-                        <div class="message-content">
-
-                            <div class="person-name">Woody</div>
-                            <p  > ghnoug noughnough ghnoug noughnough ghnoug noughnough ghnoug noughnough ghnoug noughnough</p>
-                        </div>
-                        <ion-note  >3:43 pm</ion-note>
-                    </div>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                    <div class="message message-right">
-                        <div class="message-content">
-                            <div class="person-name">Alessandro Marengoni</div>
-                            <p  > ghnoug ghnoug noughnoughghnoug noughnoughghnoug noughnough noughnough</p>
-                        </div>
-                        <ion-note  >3:43 pm</ion-note>
-                    </div>
             </ion-col>
         </ion-row>
     </ion-grid>
@@ -212,14 +64,12 @@
             <div >
                 <ion-list>
                     <ion-item class="ion-item-input">
-                        <ion-icon name="happy" item-left color="primary"></ion-icon>
-                        <textarea fz-elastic rows="1" placeholder="Scrivi un messaggio"></textarea>
-                        <!--<ion-textarea fz-elastic placeholder="Scrivi un messaggio"></ion-textarea>-->
-                        <!--<ion-input type="text" placeholder="Scrivi un messaggio"></ion-input>-->
-                        <ion-icon name="arrow-forward" item-right color="primary"></ion-icon>
+                        <ion-icon name="happy" item-left color="primary" ></ion-icon>
+                        <textarea [(ngModel)]="message" fz-elastic rows="1" placeholder="Scrivi un messaggio"></textarea>
+                        <ion-icon name="arrow-forward" item-right color="primary" (click)="send()"></ion-icon>
                     </ion-item>
-                    <ion-item  class="ion-item-mic">
-                        <ion-icon name="mic" (press)="recordingAudio()" item-right color="light"></ion-icon>
+                    <ion-item  class="ion-item-mic" (touchstart)="recordigStart()" (touchend)="recordigEnd()">
+                        <ion-icon name="mic"  item-right color="light"></ion-icon>
                     </ion-item>
                 </ion-list>
             </div>

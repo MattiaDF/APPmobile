@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
-import {PopoverController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, PopoverController} from 'ionic-angular';
+import {File} from '@ionic-native/file';
 
 /**
  * Generated class for the HomePage page.
@@ -15,7 +15,13 @@ import {PopoverController} from 'ionic-angular';
 })
 export class HomePage {
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController, private file: File) {
+//        this.file.createDir(this.file.externalDataDirectory, "QuickChat",true).then((result) => {
+//        this.file.createDir("file:///storage/emulated/0", "QuickChat",true).then((result) => {
+//            console.log(result);
+//            console.log("creata: " + this.file.dataDirectory);
+//        
+//        });
     }
 
     ionViewDidLoad() {

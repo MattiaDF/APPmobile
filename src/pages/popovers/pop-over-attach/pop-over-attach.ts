@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
-import {MediaCapture, MediaFile, CaptureError, CaptureImageOptions, CaptureAudioOptions} from '@ionic-native/media-capture';
 
 
 /**
@@ -18,7 +17,6 @@ export class PopOverAttachPage {
 
     constructor(public navCtrl: NavController, 
         public navParams: NavParams,
-        private mediaCapture: MediaCapture
         ) {
     }
 
@@ -31,12 +29,5 @@ export class PopOverAttachPage {
     }
 
     capturePhoto() {
-        let options: CaptureImageOptions = {limit: 1};
-        //        let options: CaptureAudioOptions = {limit: 1};
-        this.mediaCapture.captureImage(options)
-            .then(
-            (data: MediaFile[]) => console.log(data),
-            (err: CaptureError) => console.error(err)
-            );
     }
 }

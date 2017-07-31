@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { HomePage } from './home';
+import {File} from '@ionic-native/file';
 
 @NgModule({
   declarations: [
@@ -11,6 +12,9 @@ import { HomePage } from './home';
   ],
   exports: [
     HomePage
+  ],
+  providers:[
+      File
   ]
 })
 export class HomePageModule {}

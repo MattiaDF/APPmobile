@@ -45,6 +45,14 @@ page-chat {
                 width: auto;
             }
 
+                ion-range ion-icon {
+                    padding-right: 10px !important;
+                }
+            ion-range{
+                width: 200px;
+
+            }
+
         }
 
         p {

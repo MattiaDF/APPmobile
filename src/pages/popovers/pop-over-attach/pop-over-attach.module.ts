@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { PopOverAttachPage } from './pop-over-attach';
-import {MediaCapture} from '@ionic-native/media-capture';
 
 
 @NgModule({
@@ -15,7 +14,6 @@ import {MediaCapture} from '@ionic-native/media-capture';
     PopOverAttachPage
   ],
   providers: [
-      MediaCapture
   ]
 })
 export class PopOverAttachPageModule {}
