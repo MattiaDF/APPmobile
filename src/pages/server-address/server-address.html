@@ -10,25 +10,20 @@
                     <img src="assets/img/logo2.png" alt=""/>
                 </div>
                 <p text-center>
-                    Inserisci il codice che hai ricevuto per messaggio!
+                    Inserisci indirizzo server
                 </p>
 
                 <ion-list no-lines>
-                    <ion-item hidden>
-                        <ion-input block  [(ngModel)]="phone"></ion-input>
-                    </ion-item>
                     <ion-item >
-                        <ion-label>Codice</ion-label>
-                        <ion-input   [(ngModel)]="code" block></ion-input>
+                        <ion-label>Address</ion-label>
+                        <ion-input   [(ngModel)]="address" block></ion-input>
                     </ion-item>
                 </ion-list>
 
                 <div class="buttons-container">
-                    <button ion-button block round icon-right (click)="register()" >
-                            REGISTRATI
-                            <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+                    <button ion-button block round icon-right (click)="registerAddress()" >
+                            SALVA
                     </button>
-                    <button ion-button full outline small clear >Richiedi nuovo codice</button>
                 </div>
 
             </ion-col>

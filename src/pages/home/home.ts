@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams, PopoverController} from 'ionic-angular';
 import {File} from '@ionic-native/file';
+import {DbProvider} from '../../providers/db/db'
 
 /**
  * Generated class for the HomePage page.
@@ -15,7 +16,11 @@ import {File} from '@ionic-native/file';
 })
 export class HomePage {
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController, private file: File) {
+    constructor(public navCtrl: NavController, 
+        public navParams: NavParams, 
+        public popoverCtrl: PopoverController, 
+        private file: File,
+        _db: DbProvider) {
 //        this.file.createDir(this.file.externalDataDirectory, "QuickChat",true).then((result) => {
 //        this.file.createDir("file:///storage/emulated/0", "QuickChat",true).then((result) => {
 //            console.log(result);

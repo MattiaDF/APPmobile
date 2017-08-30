@@ -1,5 +1,9 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams, AlertController, LoadingController} from 'ionic-angular';
+import {AuthProvider} from '../../providers/auth/auth'
+import {UserProvider} from "../../providers/user/user";
+
+import {User} from "../../models/user"
 
 /**
  * Generated class for the ValidationPage page.
@@ -22,9 +26,13 @@ export class ValidationPage {
         public navParams: NavParams,
         public alertCtrl: AlertController,
         public loadingCtrl: LoadingController,
+        private sAuth: AuthProvider,
+        private sUser: UserProvider,
     ) {
-        this.phone = navParams.get('phone');;
-        this.code = navParams.get('code');;
+        this.phone = navParams.get('phone');
+        this.code = ""+navParams.get('code');
+        console.log(this.code, this.phone);
+        
     }
 
     ionViewDidLoad() {
@@ -35,13 +43,20 @@ export class ValidationPage {
         this._validate().then(() => {
             const loading = this.loadingCtrl.create({content: "caricamento..."});
             loading.present();
-            this.signup().then(() => {
+            this.sAuth.signup(this.phone, this.code).then((user) => {
+                //save user in storage
+                this.sUser.save(new User(user)).then( () => {
+                    this.sUser.get().then( user => {
+                        console.log(user);
+                    })
+                    
+                })
                 loading.dismiss().then(() => {
                     this.navCtrl.setRoot('HomePage');
                 })
             })
 
-        }).catch(() => {});
+        }).catch((error) => {console.log(error)});
 
     }
 
@@ -63,14 +78,6 @@ export class ValidationPage {
                 resolve();
             }
         });
-    }
-
-    private signup() {
-        return new Promise((resolve, reject) => {
-    setTimeout(() => {
-        resolve();
-    }, 2000);
-});
     }
 
 }

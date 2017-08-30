@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams, AlertController, LoadingController} from 'ionic-angular';
+import {AuthProvider} from '../../providers/auth/auth';
 
 /**
  * Generated class for the RegistrationPage page.
@@ -21,6 +22,7 @@ export class RegistrationPage {
         public navParams: NavParams,
         public loadingCtrl: LoadingController,
         public alertCtrl: AlertController,
+        public sAuth: AuthProvider
     ) {
     }
 
@@ -32,23 +34,29 @@ export class RegistrationPage {
         this._validate().then(() => {
             const loading = this.loadingCtrl.create({content: "Ti stiamo inviando un sms con il codice di attivazione!"});
             loading.present();
-            this.getCode().then((code) => {
-                loading.dismiss().then(() => {
-                    console.log('code: ' + code)
-                    this.navCtrl.push('ValidationPage',{phone: this.phone, code: code});
+            this.sAuth.askCode(this.phone)
+                .then((code) => {
+                    loading.dismiss().then(() => {
+                        this.navCtrl.push('ValidationPage', {phone: this.phone, code: code});
+                    })
+                }).catch(error => {
+                    this.alertCtrl.create({
+                        title: "QuickChat",
+                        message: 'Errore connessione ',
+                        buttons: ["OK"]
+                    }).present();
                 })
-            })
-            
+
         }).catch(() => {});
 
     }
 
-    private _validate():Promise<any> {
+    private _validate(): Promise<any> {
         return new Promise((resolve, reject) => {
             let msg = "";
             if (this.phone.trim() === "") {
                 msg = "Inserire un numero di telefono";
-            } 
+            }
             if (msg !== "") {
                 this.alertCtrl.create({
                     title: "QuickChat",
@@ -60,14 +68,6 @@ export class RegistrationPage {
             } else {
                 resolve();
             }
-        });
-    }
-
-    private getCode():Promise<{ code: string}> {
-        return new Promise((resolve, reject) => {
-            setTimeout( () => {
-                resolve("12345");
-            }, 2000);
         });
     }
 
