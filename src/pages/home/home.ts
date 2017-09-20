@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams, PopoverController} from 'ionic-angular';
 import {File} from '@ionic-native/file';
 import {DbProvider} from '../../providers/db/db'
+import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts';
+import {UserProvider} from "../../providers/user/user";
 
 /**
  * Generated class for the HomePage page.
@@ -20,14 +22,30 @@ export class HomePage {
         public navParams: NavParams, 
         public popoverCtrl: PopoverController, 
         private file: File,
-        _db: DbProvider) {
+        private contacts: Contacts,
+        private _db: DbProvider,
+        private sUser: UserProvider) {
 //        this.file.createDir(this.file.externalDataDirectory, "QuickChat",true).then((result) => {
 //        this.file.createDir("file:///storage/emulated/0", "QuickChat",true).then((result) => {
 //            console.log(result);
 //            console.log("creata: " + this.file.dataDirectory);
 //        
+        this.sUser.get().then( user => {
+                        console.log(user, 'home');
+                        this._db.addUser(user);
+                    })
+                    
+                    this._db.getAllUsers();
+ this.contacts.find([ 'displayName', 'name' ],{}).then((contacts) => {
+     console.log(contacts);
+        }, (error) => {
+          console.log(error);
+        });
 //        });
     }
+
+
+
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad HomePage');

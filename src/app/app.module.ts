@@ -28,6 +28,7 @@ import { CommonProvider } from '../providers/common/common';
         HttpModule,
         IonicStorageModule.forRoot({
             name: '__quickchat_configuration',
+             driverOrder: ['websql', 'sqlite']
         }),
         IonicModule.forRoot(MyApp),
     ],

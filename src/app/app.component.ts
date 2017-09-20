@@ -13,8 +13,8 @@ export class MyApp {
 
     constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen ) {
         platform.ready().then(() => {
-            this.rootPage = 'HomePage'
-//            this.rootPage = 'ServerAddressPage'
+//            this.rootPage = 'HomePage'
+            this.rootPage = 'ServerAddressPage'
             //            this.rootPage = 'InfoContactPage'
 //                        this.rootPage = 'ChatPage'
 
