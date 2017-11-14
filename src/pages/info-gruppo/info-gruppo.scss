@@ -10,6 +10,11 @@ page-info-gruppo {
         white-space: nowrap;
         padding-left: 10px;
         padding-right: 10px;
+
+        img{
+            height: 82px;
+            padding-left: 6px;
+        }
     }
     ion-list{
         ion-list-header {
@@ -20,7 +25,7 @@ page-info-gruppo {
 
     .top-content{
         margin-top:0px !important;
-      
+
     }
     .shadow-background{
         margin-top:10px;

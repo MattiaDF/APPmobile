@@ -4,88 +4,119 @@ import 'rxjs/add/operator/map';
 import {SQLite, SQLiteObject} from '@ionic-native/sqlite';
 import {User} from "../../models/user";
 
+import {Platform} from 'ionic-angular';
+
+import {PRODUCTION} from '../../constants';
+
 /*
   Generated class for the DbProvider provider.
 
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular 2 DI.
 */
+
+declare var window: any;
+
 @Injectable()
 export class DbProvider {
 
-    private db: SQLiteObject;
+    private storage: any;
+    private isOpen: boolean = false;
 
-    constructor(private sqlite: SQLite) {
+    constructor(private sqlite: SQLite, public platform: Platform) {
         console.log('Hello DbProvider Provider');
-        this._init();
-
-
+        if (!this.isOpen) {
+            this.createStorage();
+        }
     }
 
-    _init() {
-        this.sqlite.create({
-            name: 'data.db',
-            location: 'default'
-        })
-            .then((db: SQLiteObject) => {
-                this.db = db;//rimettere blob
-                db.executeSql('create table IF NOT EXISTS user(id INTEGER(10), name VARCHAR(32), phone VARCHAR(10), url_img VARCHAR(100), active_push INTEGER(1), updated_at TEXT)', {})
-                    .then(() => console.log('Executed SQL'))
-                    .catch(e => console.log(e));
+    private createStorage(): Promise<any> {
 
-                db.executeSql('create table IF NOT EXISTS chatroom(id INTEGER(10), name VARCHAR(32), token VARCHAR(64), created_at TEXT, url_img VARCHAR(100), user_id INTEGER(10), updated_at TEXT, type INTEGER(1))', {})
-                    .then(() => console.log('Executed SQL'))
-                    .catch(e => console.log(e));
+        return new Promise((resolve, reject) => {
+            if (this.platform.is('core')) {
+                console.log('web');
+                this.storage = window.openDatabase("data.db", "1.0", "MyChat", -1);
+                this.isOpen = true;
+                this.createTable();
+                resolve();
+            } else {
+                console.log('mysqlite');
+                this.sqlite.create({name: "data.db", location: "default"}).then((db: SQLiteObject) => {
+                    this.storage = db;
+                    this.isOpen = true;
+                    console.log('db aperto', this.storage)
+                    this.createTable().then(() => {
+                        console.log('table create');
+                        resolve();
+                    }).catch(() => {
+                        console.log('table NON create')
+                        reject();
+                    });;
+                });
+            }
+        });
+    }
 
-                db.executeSql('create table IF NOT EXISTS partecipant(user_id INTEGER(10), chatroom_id INTEGER(10))', {})
-                    .then(() => console.log('Executed SQL'))
-                    .catch(e => console.log(e));
 
-                db.executeSql('create table IF NOT EXISTS message(id INTEGER(10), type INTEGER(1), text TEXT, created_at TEXT, chatroom_id INTEGER(10), sender_id INTEGER(10), media_url VARCHAR(100))', {})
-                    .then(() => console.log('Executed SQL'))
-                    .catch(e => console.log(e));
+    createTable(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.storage.transaction(function (tx) {
+//                if (!PRODUCTION) {
+//                    tx.executeSql('drop table IF EXISTS users');
+//                    tx.executeSql('drop table IF EXISTS chats');
+//                    tx.executeSql('drop table IF EXISTS partecipants');
+//                    tx.executeSql('drop table IF EXISTS messages');
+//                }
+                tx.executeSql('create table IF NOT EXISTS users(id INTEGER(10), name VARCHAR(32) NULL, phone VARCHAR(10), active_push INTEGER(1), updated_at TEXT NULL, is_contact INTEGER(1))');
+                tx.executeSql('create table IF NOT EXISTS chats(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(50) NULL, token VARCHAR(64), created_at TEXT, url_img VARCHAR(100) NULL, updated_at TEXT NULL, type INTEGER(1))')
+                tx.executeSql('create table IF NOT EXISTS participants(user_id INTEGER(10), chat_token VARCHAR(64))');
+                tx.executeSql('create table IF NOT EXISTS messages(id INTEGER PRIMARY KEY AUTOINCREMENT, type INTEGER(1), text TEXT NULL, created_at TEXT, chat_token VARCHAR(64), sender_id INTEGER(10) NULL, media_url VARCHAR(500) NULL, received INTEGER(1))');
+            }).then(() => {
+                resolve();
+            }).catch(() => {
+                reject();
             })
-            .catch(e => console.log(e));
+        });
     }
 
-    query(query: string) {
-        return this.db.executeSql(query, [])
-            .then(data => {
-                return data;
-            }, err => {
-                console.log('Error: ', err);
-                return err;
+    query(q: string, params?: any): Promise<any> {
+        return new Promise((resolve, reject) => {
+            if (!this.isOpen) {
+                this.createStorage().then(() => {
+                    this.executeQueryDb(q, params).then((res) => {
+                        resolve(res);
+                    }).catch((err) => {
+                        reject(err);
+                    })
+                })
+            } else {
+                this.executeQueryDb(q, params).then((res) => {
+                    resolve(res);
+                }).catch((err) => {
+                    reject(err);
+                })
+            }
+        })
+
+    }
+
+    executeQueryDb(q: string, params?: any): Promise<any> {
+        return new Promise((resolve, reject) => {
+            params = params || [];
+            this.storage.transaction((tx) => {
+                tx.executeSql(q, params, (tx, res) => {
+                    resolve(res);
+                }, (tx, err) => {
+                    reject(err);
+                });
             });
+        });
     }
 
-
-    addUser(user: User) {
-        return this.db.executeSql("INSERT INTO user (id, name, phone, url_img, active_push, updated_at) VALUES (?, ?, ?, ?,?,?)", [user.id, user.name, user.phone, user.url_img, user.active_push, user.updated_at])
-            .then(data => {
-                console.log("utente inserito", data);
-                return data;
-            }, err => {
-                console.log('Error: ', err);
-                return err;
-            });
+    getTransaction() {
+        this.storage.transaction((tx) => {
+            return tx;
+        })
     }
-    
-    getAllUsers() {
-        return this.db.executeSql("SELECT * FROM user WHERE 1",[] )
-            .then(data => {
-                console.log("utenti", data);
-                return data;
-            }, err => {
-                console.log('Error: ', err);
-                return err;
-            });
-    }
-
-
-    // public add() {
-    //        this.db.executeSql("INSERT INTO partecipant (user_id, chatroom_id) VALUES ('123', '321')", [])
-    //            .then(() => console.log('Executed SQL'))
-    //                    .catch(e => console.log(e)); 
-    //    }
 
 }

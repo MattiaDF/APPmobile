@@ -9,6 +9,11 @@ page-info-contatto {
         white-space: nowrap;
         padding-left: 10px;
         padding-right: 10px;
+
+        img{
+            height: 82px;
+            padding-left: 6px;
+        }
     }
     ion-list{
         ion-list-header {
@@ -19,7 +24,7 @@ page-info-contatto {
 
     .top-content{
         margin-top:0px !important;
-  
+
     }
     .shadow-background{
         margin-top:10px;
@@ -28,6 +33,7 @@ page-info-contatto {
         box-shadow: 0px 3px 6px #ccc !important;
         overflow: auto;
         zoom: 1;
+
 
 
         .header-label{

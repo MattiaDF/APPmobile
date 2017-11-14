@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 
 
 /**
@@ -14,20 +14,21 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
     templateUrl: 'pop-over-attach.html',
 })
 export class PopOverAttachPage {
-
-    constructor(public navCtrl: NavController, 
+    
+    constructor(public navCtrl: NavController,
         public navParams: NavParams,
-        ) {
+        public viewCtrl: ViewController
+    ) {
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad PopOverAttachPage');
     }
 
-    close() {
+    close(name) {
+        this.viewCtrl.dismiss(name);
         console.log("closed");
     }
+    
 
-    capturePhoto() {
-    }
 }

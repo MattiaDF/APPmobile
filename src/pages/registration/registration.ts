@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams, AlertController, LoadingController} from 'ionic-angular';
 import {AuthProvider} from '../../providers/auth/auth';
+import {File} from '@ionic-native/file';
+
 
 /**
  * Generated class for the RegistrationPage page.
@@ -15,15 +17,22 @@ import {AuthProvider} from '../../providers/auth/auth';
 })
 export class RegistrationPage {
 
-    phone: string = "";
+    phone: string = "3294243965";
 
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
         public loadingCtrl: LoadingController,
         public alertCtrl: AlertController,
-        public sAuth: AuthProvider
+        public sAuth: AuthProvider,
     ) {
+    let file : File = new File();
+    file.createDir(file.externalApplicationStorageDirectory, "media", true).then(() => {
+        console.log("Cartella media creata")
+    }).catch((err) => {
+        console.log('Errore creazione cartella media', file.externalApplicationStorageDirectory, err)
+    })
+    
     }
 
     ionViewDidLoad() {

@@ -5,18 +5,27 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 import {StatusBar} from '@ionic-native/status-bar';
 import {HttpModule} from '@angular/http';
 import {IonicStorageModule} from '@ionic/storage';
-
 import {MyApp} from './app.component';
-import {AudioProvider} from '../providers/audio/audio';
-import {File} from '@ionic-native/file';
-import {MediaPlugin, MediaObject} from '@ionic-native/media';
-import {FilePath} from '@ionic-native/file-path';
-import {AudiocomponentComponent} from '../components/audiocomponent/audiocomponent';
-import {UserProvider} from '../providers/user/user';
-import {DbProvider} from '../providers/db/db';
+import {Contacts} from '@ionic-native/contacts';
 import {SQLite} from '@ionic-native/sqlite';
-import { AuthProvider } from '../providers/auth/auth';
-import { CommonProvider } from '../providers/common/common';
+import {FileTransfer} from '@ionic-native/file-transfer';
+import {Vibration} from '@ionic-native/vibration';
+import {File} from '@ionic-native/file';
+import {Badge} from '@ionic-native/badge';
+
+//import {MediaPlugin} from '@ionic-native/media';
+
+//my providers
+import {UserProvider} from '../providers/user/user';
+import {StorageProvider} from '../providers/storage/storage';
+import {DbProvider} from '../providers/db/db';
+//import {AuthProvider} from '../providers/auth/auth';
+import {ContactProvider} from '../providers/contact/contact';
+import {WebSocketProvider} from '../providers/web-socket/web-socket';
+import {ChatProvider} from "../providers/chat/chat";
+import {MediaProvider} from '../providers/media/media';
+
+
 
 @NgModule({
     declarations: [
@@ -26,11 +35,12 @@ import { CommonProvider } from '../providers/common/common';
     imports: [
         BrowserModule,
         HttpModule,
+        IonicModule.forRoot(MyApp),
         IonicStorageModule.forRoot({
             name: '__quickchat_configuration',
-             driverOrder: ['websql', 'sqlite']
+            driverOrder: ['websql', 'sqlite']
         }),
-        IonicModule.forRoot(MyApp),
+
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -40,15 +50,21 @@ import { CommonProvider } from '../providers/common/common';
         StatusBar,
         SplashScreen,
         {provide: ErrorHandler, useClass: IonicErrorHandler},
-        AudioProvider,
-        MediaPlugin,
-        File,
-        FilePath,
-        UserProvider,
-        DbProvider,
         SQLite,
-    AuthProvider,
-    CommonProvider
+        Vibration,
+        FileTransfer,
+        Contacts,
+        File,
+        Badge,
+        //        MediaPlugin,
+        StorageProvider,
+        DbProvider,
+        UserProvider,
+        //        AuthProvider,
+        ContactProvider,
+        ChatProvider,
+        WebSocketProvider,
+        MediaProvider,
     ]
 })
 export class AppModule {}

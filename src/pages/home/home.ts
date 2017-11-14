@@ -1,16 +1,18 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, PopoverController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, PopoverController, Platform, Events} from 'ionic-angular';
 import {File} from '@ionic-native/file';
-import {DbProvider} from '../../providers/db/db'
-import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts';
-import {UserProvider} from "../../providers/user/user";
 
-/**
- * Generated class for the HomePage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+
+
+//my providers
+import {UserProvider} from "../../providers/user/user";
+import {ChatProvider} from "../../providers/chat/chat";
+import {ContactProvider} from "../../providers/contact/contact";
+import {WebSocketProvider} from "../../providers/web-socket/web-socket";
+
+//models
+import {Chat} from "../../models/chat";
+
 @IonicPage()
 @Component({
     selector: 'page-home',
@@ -18,38 +20,55 @@ import {UserProvider} from "../../providers/user/user";
 })
 export class HomePage {
 
-    constructor(public navCtrl: NavController, 
-        public navParams: NavParams, 
-        public popoverCtrl: PopoverController, 
-        private file: File,
-        private contacts: Contacts,
-        private _db: DbProvider,
-        private sUser: UserProvider) {
-//        this.file.createDir(this.file.externalDataDirectory, "QuickChat",true).then((result) => {
-//        this.file.createDir("file:///storage/emulated/0", "QuickChat",true).then((result) => {
-//            console.log(result);
-//            console.log("creata: " + this.file.dataDirectory);
-//        
-        this.sUser.get().then( user => {
-                        console.log(user, 'home');
-                        this._db.addUser(user);
-                    })
-                    
-                    this._db.getAllUsers();
- this.contacts.find([ 'displayName', 'name' ],{}).then((contacts) => {
-     console.log(contacts);
-        }, (error) => {
-          console.log(error);
-        });
-//        });
+    public chats: Array<Chat>;
+
+    constructor(public navCtrl: NavController,
+        public navParams: NavParams,
+        public popoverCtrl: PopoverController,
+        private sChat: ChatProvider,
+        private sContact: ContactProvider,
+        private sWebSocket: WebSocketProvider,
+        public platform: Platform,
+        public events: Events,
+
+    ) {
+
     }
-
-
-
 
     ionViewDidLoad() {
+        this.sContact.loadContacts().then((users) => {
+            console.log('resolve 1')
+            this.sChat.loadChats().then((chats) => {
+                console.log('resolve 2')
+                this.chats = this.sChat.chats;
+                this.sContact.updateContacts().then(() => {
+                    console.log('resolve 3')
+                    this.sChat.updateRemoteChats().then(() => {
+                        console.log('resolve 4')
+                        this.sChat.remoteMessages();
+
+                        this.events.subscribe('list_chat:changed', () => {
+                            this.chats = this.sChat.chats;
+                        })
+
+                        this.platform.resume.subscribe(() => {
+                            this.sChat.remoteMessages()
+                        });
+
+
+                    }).catch((errr) => console.log(errr, 'errore update home'))
+                }).catch((errr) => console.log(errr, 'errore update home'))
+            }).catch((errr) => console.log(errr, 'errore update home'))
+        }).catch((errr) => console.log(errr, 'errore update home'))
         console.log('ionViewDidLoad HomePage');
     }
+
+    //    ionViewWillEnter() {
+    //    }
+
+
+    //    ionViewWillUnload() {
+    //    }
 
     presentPopover($event: any) {
         let popover = this.popoverCtrl.create('PopOverHomePage');
@@ -57,8 +76,19 @@ export class HomePage {
             ev: $event
         });
     }
-    
-    toChat() {
-        this.navCtrl.push("ChatPage");
+
+    toChat(chat) {
+        this.navCtrl.push("ChatPage", {'chat': chat});
+
+    }
+
+    toSearch() {
+        this.navCtrl.push("SearchPage");
+
+    }
+
+    addChat() {
+        this.navCtrl.push("NewChatPage");
+
     }
 }

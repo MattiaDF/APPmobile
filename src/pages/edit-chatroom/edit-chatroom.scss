@@ -1,0 +1,51 @@
+page-nome-gruppo {
+   .content-md{
+        background-color: #d6d6da;
+    }
+
+    .my-scroll-content{
+        overflow-x: scroll;
+        height: 82px;
+        white-space: nowrap;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    ion-list{
+        ion-list-header {
+            margin-bottom: 0 !important;
+
+        }
+    }
+
+    .top-content{
+        margin-top:0px !important;
+      
+    }
+    .shadow-background{
+        margin-top:10px;
+        padding-bottom: 10px;
+        background-color: white !important;
+        box-shadow: 0px 3px 6px #ccc !important;
+        overflow: auto;
+        zoom: 1;
+        position:relative;
+
+
+        .header-label{
+            color: #757575;
+            font-size: 14px;
+            padding-left: 16px;
+            margin-left: 0;
+            margin-right: 8px;
+            padding-top: 13px;
+            margin-bottom: 13px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+    .item-md ion-avatar{
+        img{
+            border-radius: 25%;
+        }
+    }
+}

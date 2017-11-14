@@ -6,9 +6,12 @@
 -->
 <ion-header>
     <ion-navbar color="primary">
-        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-      
-</ion-navbar>
+        <ion-searchbar 
+            [(ngModel)]="inputValue"
+            (ionInput)="onInput($event)"
+            ></ion-searchbar>
+
+    </ion-navbar>
 </ion-header>
 
 
@@ -16,64 +19,20 @@
 
     <ion-list class="shadow-background">
         <ion-label class="header-label">Chat aperte</ion-label>
-        <ion-item>
+        <ion-item *ngFor="let chat of chats" (click)="toChat(chat)">
             <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
+                <img [src]="chat.getAvatar().small">
             </ion-avatar>
-            <h2>mattia di federico</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>tamara starinieri</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
+            <h2>{{ chat.getName() }}</h2>
         </ion-item>
     </ion-list>
     <ion-list>
         <ion-label class="header-label">Altri contatti</ion-label>
-        <ion-item>
+        <ion-item *ngFor="let user of contacts" (click)="clickContact(user)">
             <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
+                <img [src]="user.avatar.small">
             </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
+            <h2>{{ user.name }}</h2>
         </ion-item>
     </ion-list>
 

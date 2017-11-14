@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams, AlertController, LoadingController} from 'ionic-angular';
 import {Http, Response} from '@angular/http';
-import {Storage} from '@ionic/storage';
+import {StorageProvider} from "../../providers/storage/storage"
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
-import {URL_BASE, URL} from '../../constants';
+import {URL_BASE} from '../../constants';
 
 /**
  * Generated class for the ServerAddressPage page.
@@ -20,14 +20,16 @@ import {URL_BASE, URL} from '../../constants';
 })
 export class ServerAddressPage {
 
-    address: string;
+//    address: string = '192.168.1.10:8084';
+    address: string = '192.168.0.185:8084';
+//    address: string = '192.168.43.118:8084';
 
     constructor(public navCtrl: NavController,
         public navParams: NavParams,
         public loadingCtrl: LoadingController,
         public alertCtrl: AlertController,
         private _http: Http,
-        private storage: Storage
+        private sStorage: StorageProvider
     ) {
     }
 
@@ -40,7 +42,7 @@ export class ServerAddressPage {
             const loading = this.loadingCtrl.create({content: "Verifica connessione in corso..."});
             loading.present();
             this.testAddress().then(() => {
-                this.storage.set('server_address', 'http://' + this.address + URL_BASE).then(() => {
+                this.sStorage.saveServerAddress(this.address).then(() => {
                     console.log('ok');
                 }).catch(() => {
                     console.log('ko');
@@ -86,7 +88,8 @@ export class ServerAddressPage {
 
     private testAddress():Promise<any> {
         return new Promise((resolve, reject) => {
-            this._http.get('http://' + this.address + URL_BASE + 'test', {})
+            console.log('sono dentro test');
+            this._http.get('http://' + this.address + URL_BASE.API + 'test', {})
                 .toPromise()
                 .then(() => {
                     resolve();

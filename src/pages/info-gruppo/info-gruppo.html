@@ -7,12 +7,12 @@
 <ion-header>
 
     <ion-navbar color="primary">
-        <ion-title>Università</ion-title>
+        <ion-title>{{chat.getName()}}</ion-title>
         <ion-buttons right>
-            <button ion-button icon-only color="royal" (click)="editName()">
+            <button ion-button icon-only color="royal" (click)="edit()">
                 <ion-icon name="create"  ></ion-icon>
             </button>
-            
+
         </ion-buttons>
     </ion-navbar>
 
@@ -22,21 +22,13 @@
 <ion-content>
 
     <div class="shadow-background top-content">
-        <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt=""/>
+        <img [src]="chat.getAvatar().src" class="img-responsive">
+
     </div>
     <div class="shadow-background">
-        <ion-label class="header-label">Media</ion-label>
+        <ion-label class="header-label" (click)="allMedia()">Media</ion-label>
         <div class="my-scroll-content">
-            <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            <img src="assets/img/avatar-ts-woody.png" alt=""/>
+            <img src="{{m}}" *ngFor="let m of media" (click)="viewPhoto(m)">
         </div>
     </div>
     <!--<div class="shadow-background">-->
@@ -45,68 +37,11 @@
         <ion-list-header>
             Partecipanti
         </ion-list-header>
-        <ion-item (click)="navToInfoContatto()">
+        <ion-item *ngFor="let participant of chat.participants">
             <ion-avatar item-start>
-                <img src="assets/img/avatar-ts-woody.png">
+                <img [src]="participant.avatar.small" (click)="viewPhoto(participant.avatar.src)">
             </ion-avatar>
-            <h2>Mattia Di Federico</h2>
-
-        </ion-item>
-        <ion-item (click)="navToInfoContatto()">
-            <ion-avatar item-start>
-                <img src="assets/img/avatar-ts-woody.png">
-            </ion-avatar>
-            <h2>Mattia Di Federico</h2>
-
-        </ion-item>
-        <ion-item (click)="navToInfoContatto()">
-            <ion-avatar item-start>
-                <img src="assets/img/avatar-ts-woody.png">
-            </ion-avatar>
-            <h2>Mattia Di Federico</h2>
-
-        </ion-item>
-        <ion-item (click)="navToInfoContatto()">
-            <ion-avatar item-start>
-                <img src="assets/img/avatar-ts-woody.png">
-            </ion-avatar>
-            <h2>Mattia Di Federico</h2>
-
-        </ion-item>
-        <ion-item (click)="navToInfoContatto()">
-            <ion-avatar item-start>
-                <img src="assets/img/avatar-ts-woody.png">
-            </ion-avatar>
-            <h2>Mattia Di Federico</h2>
-
-        </ion-item>
-        <ion-item (click)="navToInfoContatto()">
-            <ion-avatar item-start>
-                <img src="assets/img/avatar-ts-woody.png">
-            </ion-avatar>
-            <h2>Mattia Di Federico</h2>
-
-        </ion-item>
-        <ion-item (click)="navToInfoContatto()">
-            <ion-avatar item-start>
-                <img src="assets/img/avatar-ts-woody.png">
-            </ion-avatar>
-            <h2>Mattia Di Federico</h2>
-
-        </ion-item>
-        <ion-item (click)="navToInfoContatto()">
-            <ion-avatar item-start>
-                <img src="assets/img/avatar-ts-woody.png">
-            </ion-avatar>
-            <h2>Mattia Di Federico</h2>
-
-        </ion-item>
-        <ion-item (click)="navToInfoContatto()">
-            <ion-avatar item-start>
-                <img src="assets/img/avatar-ts-woody.png">
-            </ion-avatar>
-            <h2>Mattia Di Federico</h2>
-
+            <h2 (click)="navToInfoContatto(participant)">{{participant.name}}</h2>
         </ion-item>
     </ion-list>
 </ion-content>

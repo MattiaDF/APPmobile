@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {PhotoViewer} from '@ionic-native/photo-viewer';
+
+import {User} from '../../models/user'
 
 /**
  * Generated class for the InfoContattoPage page.
@@ -9,16 +12,26 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  */
 @IonicPage()
 @Component({
-  selector: 'page-info-contatto',
-  templateUrl: 'info-contatto.html',
+    selector: 'page-info-contatto',
+    templateUrl: 'info-contatto.html',
 })
 export class InfoContattoPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+    public user: User;
+    public media: Array<string>;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad InfoContattoPage');
-  }
+    constructor(public navCtrl: NavController, public navParams: NavParams, private photoViewer: PhotoViewer,
+    ) {
+        this.user = this.navParams.get('user');
+        this.media = this.navParams.get("media");
+    }
+
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad InfoContattoPage');
+    }
+
+    viewPhoto(photo) {
+        this.photoViewer.show(photo, '', {share: false});
+    }
 
 }

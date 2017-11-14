@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar color="primary">
-        <ion-title>Mattia Di Federico</ion-title>
+        <ion-title>{{user.name}}</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -16,22 +16,12 @@
 <ion-content>
 
     <div class="shadow-background top-content">
-
-        <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt=""/>
+        <img [src]="user.avatar.src" class="img-responsive">
     </div>
     <div class="shadow-background">
         <ion-label class="header-label">Media</ion-label>
         <div class="my-scroll-content media-padding">
-            <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            <img src="assets/img/avatar-ts-woody.png" alt=""/>
+            <img src="{{m}}" alt="" *ngFor="let m of media"  (click)="viewPhoto(m)" />
         </div>
     </div>
     <!--<div class="shadow-background">-->
@@ -41,13 +31,13 @@
             Info e Numero telefono
         </ion-list-header>
         <ion-item text-left>
-            <h2>3462120012</h2>
+            <h2>{{user.phone}}</h2>
             <p>cellulare</p>
         </ion-item>
-        <ion-item text-left>
-            <h2>mattiadifederico@gmail.com</h2>
-            <p>email</p>
-        </ion-item>
+        <!--        <ion-item text-left>
+                    <h2>mattiadifederico@gmail.com</h2>
+                    <p>email</p>
+                </ion-item>-->
     </ion-list>
     <!--</div>-->
 </ion-content>

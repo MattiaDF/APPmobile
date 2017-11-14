@@ -26,124 +26,13 @@
 
     <div [ngSwitch]="mediaType">
         <ion-row *ngSwitchCase="'foto'">
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
+            <ion-col *ngFor="let message of media_foto">
+                <img [src]="message.media" (click)="viewPhoto(message.media)">
             </ion-col>
         </ion-row>
         <ion-row *ngSwitchCase="'video'">
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
-            </ion-col>
-            <ion-col>
-                <img src="assets/img/avatar-ts-woody.png" alt=""/>
+            <ion-col *ngFor="let message of media_video">
+                 <img [src]="_DomSanitizer.bypassSecurityTrustUrl(message.thumbnail)" (click)="playVideo(message)">
             </ion-col>
         </ion-row>
     </div>
