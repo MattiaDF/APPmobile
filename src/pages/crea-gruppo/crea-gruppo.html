@@ -15,205 +15,21 @@
 
 
 <ion-content padding>
-    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+    <ion-searchbar 
+            [(ngModel)]="inputValue"
+            (ionInput)="onInput($event)"
+            ></ion-searchbar>
 
     <ion-list>
         <ion-label class="header-label">Contatti</ion-label>
-        <ion-item>
+        <ion-item *ngFor="let contact of resultSearch" (click)="toggleUser(contact.user)">
+        <button ion-button icon-only class="{{ contact.selected ? 'user-selected' : 'hidden'}}">
+            <ion-icon name="checkmark-circle"></ion-icon>
+        </button>
             <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
+                <img [src]="contact.user.avatar.small">
             </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt="">
-            </ion-avatar>
-            <h2>Mario Mennella</h2>
-
+            <h2>{{ contact.user.name }}</h2>
         </ion-item>
     </ion-list>
 

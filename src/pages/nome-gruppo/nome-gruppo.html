@@ -8,12 +8,12 @@
 
     <ion-navbar color="primary">
         <ion-title>Crea gruppo</ion-title>
-        <ion-buttons right>
+<!--        <ion-buttons right>
             <button ion-button icon-only color="royal" (click)="editName()">
                 <ion-icon name="create"  ></ion-icon>
             </button>
 
-        </ion-buttons>
+        </ion-buttons>-->
     </ion-navbar>
 
 </ion-header>
@@ -23,16 +23,15 @@
 
 
     <div class="shadow-background top-content">
-        <img src="assets/img/WIN_20170211_21_57_42_Pro.jpg" alt=""/>
+        <img [src]="image_url" class="img-responsive" alt=""/>
         <ion-fab right bottom>
-            <button ion-fab mini color="light"><ion-icon name="add"></ion-icon></button>
-
+            <button ion-fab mini color="light" (click)="uploadPhoto()"><ion-icon name="add"></ion-icon></button>
         </ion-fab>
     <ion-list>
 
         <ion-item>
-            <ion-label>Nome</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-label>Nome Chat</ion-label>
+            <ion-input type="text" [(ngModel)]="chat_name"></ion-input>
         </ion-item>
 
     </ion-list>
@@ -45,75 +44,18 @@
         <ion-list-header>
             Partecipanti
         </ion-list-header>
-        <ion-item (click)="navToInfoContatto()">
+        <ion-item *ngFor="let contact of contacts">
             <ion-avatar item-start>
-                <img src="assets/img/avatar-ts-woody.png">
+                <img [src]="contact.avatar.small">
             </ion-avatar>
-            <h2>Mattia Di Federico</h2>
-
-        </ion-item>
-        <ion-item (click)="navToInfoContatto()">
-            <ion-avatar item-start>
-                <img src="assets/img/avatar-ts-woody.png">
-            </ion-avatar>
-            <h2>Mattia Di Federico</h2>
-
-        </ion-item>
-        <ion-item (click)="navToInfoContatto()">
-            <ion-avatar item-start>
-                <img src="assets/img/avatar-ts-woody.png">
-            </ion-avatar>
-            <h2>Mattia Di Federico</h2>
-
-        </ion-item>
-        <ion-item (click)="navToInfoContatto()">
-            <ion-avatar item-start>
-                <img src="assets/img/avatar-ts-woody.png">
-            </ion-avatar>
-            <h2>Mattia Di Federico</h2>
-
-        </ion-item>
-        <ion-item (click)="navToInfoContatto()">
-            <ion-avatar item-start>
-                <img src="assets/img/avatar-ts-woody.png">
-            </ion-avatar>
-            <h2>Mattia Di Federico</h2>
-
-        </ion-item>
-        <ion-item (click)="navToInfoContatto()">
-            <ion-avatar item-start>
-                <img src="assets/img/avatar-ts-woody.png">
-            </ion-avatar>
-            <h2>Mattia Di Federico</h2>
-
-        </ion-item>
-        <ion-item (click)="navToInfoContatto()">
-            <ion-avatar item-start>
-                <img src="assets/img/avatar-ts-woody.png">
-            </ion-avatar>
-            <h2>Mattia Di Federico</h2>
-
-        </ion-item>
-        <ion-item (click)="navToInfoContatto()">
-            <ion-avatar item-start>
-                <img src="assets/img/avatar-ts-woody.png">
-            </ion-avatar>
-            <h2>Mattia Di Federico</h2>
-
-        </ion-item>
-        <ion-item (click)="navToInfoContatto()">
-            <ion-avatar item-start>
-                <img src="assets/img/avatar-ts-woody.png">
-            </ion-avatar>
-            <h2>Mattia Di Federico</h2>
-
+            <h2>{{ contact.name }}</h2>
         </ion-item>
     </ion-list>
 </ion-content>
 
 <ion-footer >
     <ion-toolbar color="primary">
-        <button ion-button full clear color="light" (click)="navToChatPage()" >
+        <button ion-button full clear color="light" (click)="createChat()" >
             CREA
             <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
         </button>

@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, AlertController, ModalController} from 'ionic-angular';
+import {PhotoViewer} from '@ionic-native/photo-viewer';
 
+import {ChatRoom} from '../../models/chat';
 /**
  * Generated class for the InfoGruppoPage page.
  *
@@ -14,35 +16,41 @@ import {IonicPage, NavController, NavParams, AlertController} from 'ionic-angula
 })
 export class InfoGruppoPage {
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+    public chat: ChatRoom;
+    public media: Array<string> = [];
+
+    constructor(public navCtrl: NavController, public navParams: NavParams,
+        public alertCtrl: AlertController, public modalCtrl: ModalController,
+        private photoViewer: PhotoViewer,
+    ) {
+        this.chat = this.navParams.get('chat');
+
+        for (let m of this.chat.messages) {
+            console.log(m);
+            if (m.type == 1) {
+                this.media.push(m.media);
+            }
+        }
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad InfoGruppoPage');
     }
 
-    navToInfoContatto() {
-        this.navCtrl.push("InfoContattoPage");
+    edit() {
+        this.modalCtrl.create("EditChatroomPage", {'chat': this.chat}).present();
     }
 
-    editName() {
-        this.alertCtrl.create({
-            title: "Modifica nome gruppo",
-            inputs: [{
-                name: "name",
-                type: "text"
-            }],
-            buttons: [{
-                text: "Annulla",
-                role: "cancel"
-            }, {
-                text: "Salva",
-                handler: (data) => {
-                    const name = data.name;
-                    console.log("name: " + name);
-                }
-            }]
-        }).present();
+    navToInfoContatto(user) {
+        this.navCtrl.push("InfoContattoPage", {'user': user, 'media': this.media});
+    }
+    
+    allMedia() {
+        this.navCtrl.push("MediaPage", {'messages': this.chat.messages});
+    }
+
+    viewPhoto(photo) {
+        this.photoViewer.show(photo, '', {share: false});
     }
 
 }
