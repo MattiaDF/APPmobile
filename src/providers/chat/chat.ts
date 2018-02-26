@@ -185,7 +185,7 @@ export class ChatProvider {
         return null;
     }
 
-    populateChat(c) {
+    populateChat(c): Promise<Chat> {
         return new Promise((resolve) => {
 
             this.loadParticipants(c.token).then((participants) => {
@@ -285,7 +285,7 @@ export class ChatProvider {
                         resolve();
                     }
                     for (let message of mes) {
-                        arrayPromise.push(this.saveRemoteMessage(message));
+                        arrayPromise.push(this.downloadRemoteMedia(message));
                     }
 
                     Promise.all(arrayPromise).then(() => {
@@ -297,6 +297,31 @@ export class ChatProvider {
         })
     }
 
+    downloadRemoteMedia(message){
+        return new Promise( resolve => {
+            let type = '';
+            switch (+message.type) {
+                case 1:
+                    type = 'foto';
+                    break;
+                case 2:
+                    type = 'video';
+                    break;
+                case 3:
+                    type = 'audio';
+                    break;
+            }
+        this.sMedia.downloadMedia(message.chatToken, message.urlMedia, type).then((url) => {
+                console.log("download finished")
+                message.urlMedia = url;
+                this.saveRemoteMessage(message).then(() => {
+                    //                    this.events.publish('list_chat:changed');
+                }).catch((err) => {
+                    console.log("error in chat provider listener save messagwe")
+                })
+            })
+        });
+    }
 
 
 
@@ -544,6 +569,21 @@ export class ChatProvider {
                 reject(err);
             })
 
+        })
+    }
+    
+        removeChat(chat: Chat) {
+        return new Promise((resolve) => {
+            let arrayPromise = [];
+            arrayPromise.push(this.sDb.query("DELETE FROM participants WHERE chat_token = ?", [chat.token]));
+            arrayPromise.push(this.sDb.query("DELETE FROM messages WHERE chat_token = ?", [chat.token]));
+            arrayPromise.push(this.sDb.query("DELETE FROM chats WHERE token = ?", [chat.token]));
+
+            Promise.all(arrayPromise).then(() => {
+                resolve();
+            }).catch((err) => {
+                console.log("errore delete chat", err);
+            })
         })
     }
 

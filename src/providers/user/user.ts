@@ -44,8 +44,8 @@ export class UserProvider {
             if (token === null) {
                 token = this.get().token;
             }
-            let small = this._storage.getServerAddress() + URL.USERS.AVATAR + id + '?token=' + token + '&type=iconR';
-            let src = this._storage.getServerAddress() + URL.USERS.AVATAR + id + '?token=' + token + '&type=icon';
+            let small = this._storage.getServerAddress() + URL.USERS.AVATAR + id + '?token=' + token + '&type=iconR&timestamp=' + Date.now();
+            let src = this._storage.getServerAddress() + URL.USERS.AVATAR + id + '?token=' + token + '&type=icon&timestamp=' + Date.now();
             resolve(new Avatar(small, src));
         })
     }
@@ -56,8 +56,8 @@ export class UserProvider {
 
     getAvatar(id): Avatar {
         let token = this.get().token;
-        let small = this._storage.getServerAddress() + URL.USERS.AVATAR + id + '?token=' + token + '&type=iconR';
-        let src = this._storage.getServerAddress() + URL.USERS.AVATAR + id + '?token=' + token + '&type=icon';
+        let small = this._storage.getServerAddress() + URL.USERS.AVATAR + id + '?token=' + token + '&type=iconR&timestamp=1' + Date.now();
+        let src = this._storage.getServerAddress() + URL.USERS.AVATAR + id + '?token=' + token + '&type=icon&timestamp=1' + Date.now();
         return new Avatar(small, src);
     }
 

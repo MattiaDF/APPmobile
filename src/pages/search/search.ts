@@ -8,6 +8,7 @@ import {Chat, SingleChat} from "../../models/chat";
 //my providers
 import {ContactProvider} from "../../providers/contact/contact";
 import {ChatProvider} from "../../providers/chat/chat";
+import {UserProvider} from "../../providers/user/user";
 
 import {UUID} from 'angular2-uuid';
 
@@ -37,9 +38,20 @@ export class SearchPage {
     constructor(public navCtrl: NavController,
         public navParams: NavParams,
         public sContact: ContactProvider,
-        public sChats: ChatProvider
+        public sChats: ChatProvider,
+        private sUser: UserProvider
     ) {
-        this.originalContacts = this.sContact.contactsList;
+
+        let list = this.sContact.contactsList.slice();
+        
+        console.log(list , 'list slice' );
+        let io = this.sContact.getUser(this.sUser.get().id);
+         list.splice(list.indexOf(io), 1);
+         this.originalContacts = list;
+        console.log(this.originalContacts , 'originalContacts splice' );
+        console.log(list , 'list POST splice' );
+
+
         this.contacts = this.originalContacts;
         this.originalChats = this.sChats.chats;
         this.chats = this.originalChats;

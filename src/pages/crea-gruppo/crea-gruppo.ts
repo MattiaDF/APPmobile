@@ -31,7 +31,11 @@ export class CreaGruppoPage {
     constructor(public navCtrl: NavController, public navParams: NavParams, private sContact: ContactProvider, 
         public viewCtrl: ViewController, public modalCtrl: ModalController, private sUser: UserProvider) {
         console.log('lista contatti in crea chat di gruppo', this.sContact.contactsList)
-        for (let contact of this.sContact.contactsList) {
+        
+        let io = this.sContact.getUser(this.sUser.get().id);
+        let list = this.sContact.contactsList.slice();
+        list.splice(list.indexOf(io), 1);
+        for (let contact of list) {
             this.contacts.push({user: contact, selected: false});
             this.resultSearch = this.contacts;
         }

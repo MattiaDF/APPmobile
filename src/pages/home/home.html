@@ -3,9 +3,9 @@
         <!--    <ion-navbar color="secondary">-->
         <ion-title>QUICKCHAT</ion-title>
         <ion-buttons right>
-<!--            <button ion-button icon-only color="royal">
-                <ion-icon name="notifications-off"></ion-icon>
-            </button>-->
+            <!--            <button ion-button icon-only color="royal">
+                            <ion-icon name="notifications-off"></ion-icon>
+                        </button>-->
             <button ion-button icon-only color="royal" (click)="toSearch()">
                 <ion-icon name="search"></ion-icon>
             </button>
@@ -18,17 +18,24 @@
 
 <ion-content class="list-avatar-page">
     <ion-list>
-        
-        
-        <ion-item (click)="toChat(chat)" *ngFor="let chat of chats" >
-            <ion-avatar item-start>
-                <img [src]="chat.getAvatar().small">
-            </ion-avatar>
-            <h2>{{chat.getName()}}</h2>
-            
-            <p *ngIf="chat.messages.length > 0">{{chat.messages[chat.messages.length-1].text}}</p>
-            <ion-note *ngIf="chat.messages.length" item-end>{{chat.messages[chat.messages.length-1].getDate()}}</ion-note>
-        </ion-item>
+
+        <ion-item-sliding *ngFor="let chat of chats">
+            <ion-item (click)="toChat(chat)" >
+                <ion-avatar item-start>
+                    <img [src]="chat.getAvatar().small">
+                </ion-avatar>
+                <h2>{{chat.getName()}}</h2>
+
+                <p *ngIf="chat.messages.length > 0">{{chat.messages[chat.messages.length-1].text}}</p>
+                <ion-note *ngIf="chat.messages.length" item-end>{{chat.messages[chat.messages.length-1].getDate()}}</ion-note>
+            </ion-item>
+            <ion-item-options side="rigth">
+                <button ion-button color="primary" (click)="removeChat(chat)">
+                    <ion-icon name="trash"></ion-icon>
+                    Rimuovi
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
 
     </ion-list>
 

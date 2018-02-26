@@ -26,6 +26,7 @@ export class ImpUtentePage {
 
     public user: User;
     public image_url;
+    public img_edit = false;
     public name;
     public editable: boolean = false;
 
@@ -37,7 +38,7 @@ export class ImpUtentePage {
         private camera: Camera) {
 
         let user = this.sUser.get();
-        
+
         this.user = this.sConltact.getUser(user.id);
         this.name = this.user.name;
         this.image_url = this.user.avatar.src;
@@ -46,20 +47,34 @@ export class ImpUtentePage {
     save() {
         this.user.updated_at = new Date();
         this.user.name = this.name;
+        this.user.avatar = this.sUser.getAvatar(this.user.id);
         console.log(new Date())
         console.log('nome modificato', this.user.name, 'immagine caricata', this.image_url)
-        this.sMedia.uploadImageUser(this.image_url, this.user).then(() => {
-            console.log(this.user, 'asdsadsadsdasdsadsadsad')
+        if (!this.img_edit) {
             let user = this.sUser.get();
             user.name = this.name;
+            user.avatar = this.sUser.getAvatar(user.id);
+            console.log(this.user, 'asdsadsadsdasdsadsadfgsdf333dsad')
             this.sUser.save(user).then(() => {
                 this.sConltact.updateSingleContact(this.user);
                 this.editable = false;
             })
-            console.log("transfert success");
-        }).catch((err) => {
-            console.log("transfert fail", err);
-        })
+        } else {
+            this.sMedia.uploadImageUser(this.image_url, this.user).then(() => {
+                console.log(this.user, 'asdsadsadsdasdsadsadsad')
+                let user = this.sUser.get();
+                user.name = this.name;
+                user.avatar = this.sUser.getAvatar(user.id);
+                console.log(this.user, 'asdsadsadsdasdsadsadfgsdf333dsad')
+                this.sUser.save(user).then(() => {
+                    this.sConltact.updateSingleContact(this.user);
+                    this.editable = false;
+                })
+                console.log("transfert success");
+            }).catch((err) => {
+                console.log("transfert fail", err);
+            })
+        }
     }
 
     uploadPhoto() {
@@ -78,6 +93,7 @@ export class ImpUtentePage {
 
             console.log(imageData, 'imageDAta');
             this.image_url = imageData;
+            this.img_edit = true;
         }, (err) => {
             // Handle error
         });
@@ -89,6 +105,7 @@ export class ImpUtentePage {
         this.editable = false;
         this.name = this.user.name;
         this.image_url = this.user.avatar.src;
+        this.img_edit = false;
     }
 
     ionViewDidLoad() {

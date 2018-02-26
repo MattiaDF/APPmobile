@@ -91,4 +91,10 @@ export class HomePage {
         this.navCtrl.push("NewChatPage");
 
     }
+    
+    removeChat(chat){
+        this.sChat.removeChat(chat).then(() => {
+            this.chats.splice(this.chats.indexOf(chat),1);
+        }).catch((err) => console.log(err, 'errore cacnellazione chat'));
+    }
 }

@@ -5,8 +5,9 @@ import {User} from "../../models/user";
 import {SingleChat} from "../../models/chat";
 import {ContactProvider} from "../../providers/contact/contact";
 import {ChatProvider} from "../../providers/chat/chat";
+import {UserProvider} from "../../providers/user/user";
 
-import { UUID } from 'angular2-uuid';
+import {UUID} from 'angular2-uuid';
 
 /**
  * Generated class for the NewChatPage page.
@@ -24,40 +25,44 @@ export class NewChatPage {
     public contacts: Array<User> = [];
     public originalContacts: Array<User> = [];
     public inputValue: string = '';
-    constructor(public navCtrl: NavController, public navParams: NavParams, private sContact: ContactProvider, private sChat: ChatProvider) {
-        
-        this.originalContacts = this.sContact.contactsList;
+    constructor(public navCtrl: NavController, public navParams: NavParams, private sContact: ContactProvider, private sChat: ChatProvider, private sUser: UserProvider) {
+
+        let io = this.sContact.getUser(this.sUser.get().id);
+        let list = this.sContact.contactsList.slice();
+        console.log('list contact original', list);
+        list.splice(list.indexOf(io), 1);
+        this.originalContacts = list;
         this.contacts = this.originalContacts;
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad NewChatPage');
     }
-    
-    onInput(event){
+
+    onInput(event) {
         console.log(this.inputValue, 'input');
-        if (this.inputValue === ''){
+        if (this.inputValue === '') {
             this.contacts = this.originalContacts;
             return;
-        }else {
-           this.contacts = [];
+        } else {
+            this.contacts = [];
         }
         let c: User;
-        for ( c of this.originalContacts){
+        for (c of this.originalContacts) {
             console.log(c.name.indexOf(this.inputValue), 'index');
-            if (c.name.indexOf(this.inputValue) >= 0){
+            if (c.name.indexOf(this.inputValue) >= 0) {
                 this.contacts.push(c);
             }
         }
         console.log(event, this.contacts);
     }
-    
-    
-    toChat(user){
-        let token =  UUID.UUID();
+
+
+    toChat(user) {
+        let token = UUID.UUID();
         let date = Date.now();
         let obj = {
-            token : token, created_at : date, updated_at: date
+            token: token, created_at: date, updated_at: date
         };
         let chat = new SingleChat(user, obj);
         console.log(obj, 'obj', chat, user)
