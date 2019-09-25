@@ -1,0 +1,28 @@
+page-media {
+    .segment-button{
+        border-color: map-get($colors, 'primary') !important;
+        color:  white !important;
+    }
+    .segment-md .segment-button.activated, .segment-md .segment-button.segment-activated {
+        border-color: white !important;
+        opacity: 1;
+    }
+
+    .icons-basic-page {
+        ion-row {
+            height: 100%;
+            flex-wrap: wrap;
+        }
+
+        ion-col {
+            flex: 0 0 25%;
+            max-width: 25%;
+            text-align: center;
+            /*padding: 10px 5px;*/
+            img{
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
+}

@@ -1,0 +1,46 @@
+
+export const URL_BASE = {
+    API: '/QuickChatMaven/rest/',
+    WEBSOCKET: '/QuickChatMaven/quickchat/'
+}
+
+export const URL = {
+    USERS: {
+        SIGNUP: "user/signup",
+        VALIDATION: "user/validation",
+        CHATROOMS: "chat",
+        CONTACTS: "user/contacts",
+        AVATAR: "media/people/",
+        UPDATE: "user/profile"
+    },
+    CHATS:{
+        AVATAR: "media/chats/",
+        UPDATE: "chat/update/",
+        GET: "chat/",
+        MEDIA: "media/chats/"
+    },
+    MESSAGES: "messages",
+
+    
+
+}
+
+export const STORAGE_KEYS = {
+    USER: "owner_profile",
+    SERVER_ADDRESS: "server_address",
+    WEBSOCKET_ADDRESS: "websocket_address"
+}
+
+
+export const DB_KEYS = {
+    CHATS: {
+        SINGLE: 1,
+        MULTIPLE: 2
+    }
+}
+
+//se settato a false fa drop delle tabelle alla apertura del db.
+
+export const PRODUCTION = false;
+
+export const IMAGE = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw4QEA0NDhANDg0NEA8OEBAPDRANDhIQFREWFhURFRMYHSggGBolGxUVITEhJSkrLi4uFx8zODYsNygtLisBCgoKDg0NDw8QDjcdFRkrLTc3NysrKzc3KystNzcrLSs3LSsrKy0rLTctLTc3Ny0rKy0rKysrKysrLSsrKysrK//AABEIALcAtwMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAAAgQBAwUGB//EADMQAQACAAQDBQMNAQAAAAAAAAABAgMEETEhQVEFYZGxwRIiMhMjM1JxcoGCobLR4fFC/8QAFwEBAQEBAAAAAAAAAAAAAAAAAAIBA//EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8A+rgOrkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxMgyjNksPCtbbbrOy7hYNa989ebLWyKnyN9dNP4MXCtXjPGO7kvjNbjmRZnV0L0ieExEq1sn0n8Jj1brMaQvWazpOmpEtYAAAAAAAAAAAAASDEynlcKL6zO0frLXWs2tFY5790OjSkRERHCIZa2RmtYiNI4RDIJUAAAA142FFo058p6OfpMTNZ3h1FXPYese3G9d/sbKyxoEaSkpIAAAAAAAAAAjaUkLg29ncbXnpER4/4vuZ2Zf3716xr4T/AG6aKuAAAAAADFo1iY6xMMsXnSJnpEyDkYNuDerZfZZhaAAAAAAAAAABG6SNgR7Pj538s+jquX2fHzk91Z84dRFXAAAAAABrzE+5f7tvJsJjlyBxcvssw1WrFb2rG0TwbIUlkBrAAAAAAAABGySNgRyF9MXT60THr6Oq4+W+mp9s/tl2E1cAGAAAAADXj41aVm1to/WegOdmfpb/AJf2wnVWpeb2m872nX+lmqomsgNYAAAAAAAAMSyAqY9Z3jhMcYWcp2rrNaXifamYrExtMz16I3rqpYtPZmLRvWYnwZY2PRDFZ1iJjaeLKVAAAAI4k6VtPSJ8nmsKL209q1rabe1abeb0eZtpS89K28nHy1GxlbcKmjdDEQypIAAAAAAAAAAABKtmKrLXiQDd2XmYmvycz71OEd9V9xuz8P56J+rFp9PV2UVcAAAAcvtTNaz8jXum/pCGDHBHOYWmNaZ/60mPDRtpCompgNYAAAAAAAAAADEyzSlrbRw68gY1QtOvCOMzyW6ZT60690cG+mFWu0RHmnW405PL+xEzPxW37o6LIMUAAAA14+BW8aTvG084Ur4Nqb8Y6w6IaY5sWZW75as90938K98taNvej9fBWpxARiUmsAAAAAAEZktZZymBp71t52joy1shgZbnfw/laBKgAAAAAAAAAAAGvFwa233681HEpNZ0n8J5S6SGLhxaJif8JSxQiWUNJiZrO8JrQAAMSyjeQZy9PavEco4y6Sj2bHxz3xC8irgAAAAAAAAAAAAAAACl2hT4b/ln0aayu5yutL90a+HFz8KVRNbQGsGvEZAbuyp4X+96LwIq4AAAAAAAAAAAAAAAAhjfDb7J8nJy88AbGVYAUl//2Q=="

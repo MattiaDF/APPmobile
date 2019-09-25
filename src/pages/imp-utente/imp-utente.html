@@ -1,0 +1,44 @@
+<ion-header>
+
+    <ion-navbar color="primary">
+        <ion-title>Profilo</ion-title>
+        <ion-buttons right>
+            <button ion-button icon-only color="royal" *ngIf="!editable" (click)="editable = true">
+                <ion-icon name="create"  ></ion-icon>
+            </button>
+            <button ion-button icon-only color="royal" *ngIf="editable" (click)="annulla()">
+                <ion-icon name="create"  ></ion-icon>
+            </button>
+
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+
+    <div class="shadow-background top-content">
+        <img [src]="image_url" class="img-responsive" alt=""/>
+        <ion-fab right *ngIf="editable" >
+            <button ion-fab mini color="light" (click)="uploadPhoto()"><ion-icon name="add"></ion-icon></button>
+        </ion-fab>
+    <ion-list>
+
+        <ion-item>
+            <ion-label>Nome</ion-label>
+            <ion-input type="text" [(ngModel)]="name" [disabled]="!editable"></ion-input>
+        </ion-item>
+
+    </ion-list>
+    </div>
+</ion-content>
+
+<ion-footer *ngIf="editable">
+    <ion-toolbar color="primary">
+        <button ion-button full clear color="light" (click)="save()" >
+            SALVA
+            <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+        </button>
+    </ion-toolbar>
+</ion-footer>

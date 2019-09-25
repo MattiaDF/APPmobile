@@ -2,56 +2,72 @@
     <ion-navbar color="primary">
         <ion-item color="primary" >
             <ion-avatar item-left>
-                <img  src="assets/img/avatar-ts-woody.png">
+                <img [src]="chat.getAvatar().small" (click)="viewPhoto(chat.getAvatar().src)">
             </ion-avatar>
-            <h2>Marty McFly</h2>
+            <h2 (click)="navToInfoContatto()" >{{chat.getName()}}</h2>
         </ion-item>
         <ion-buttons right>
             <button ion-button icon-only color="royal" (click)="presentPopoverAttach($event)">
                 <ion-icon name="attach"></ion-icon>
-            </button>
-            <button ion-button icon-only color="royal" (click)="presentPopoverMore($event)">
-                <ion-icon name="more"></ion-icon>
             </button>
         </ion-buttons>
     </ion-navbar>
 </ion-header>
 
 <ion-content class="chat-background-image">
+
     <ion-grid>
-        <ion-row>
-            <ion-col>
-                <div class="message message-left">
+        <ion-row  *ngFor="let message of chat.messages">
+
+            <!--testo-->
+            <ion-col *ngIf="message.type == 0">
+                <div class="message {{message.received == 0 ? 'message-right' : 'message-left'}}">
+                    <div class="message-content" >
+                        <div class="person-name">{{ message.sender.name }}</div>
+                        <p  > {{ message.text }}</p>
+                    </div>
+                    <ion-note  >{{ message.getDate() }}</ion-note>
+                </div>
+            </ion-col>
+
+            <!--immagine-->
+            <ion-col *ngIf="message.type == 1">
+                <div class="message {{message.received == 0 ? 'message-right' : 'message-left'}}">
+                    <div class="message-content" >
+                        <div class="person-name">{{ message.sender.name }}</div>
+                        <img [src]="message.media" (click)="viewPhoto(message.media)">
+                    </div>
+                    <ion-note  >{{ message.getDate() }}</ion-note>
+                </div>
+            </ion-col>
+
+            <!--video-->
+            <ion-col *ngIf="message.type == 2">
+                <div class="message {{message.received == 0 ? 'message-right' : 'message-left'}}">
+                    <div class="message-content" >
+                        <div class="person-name">{{ message.sender.name }}</div>
+                        <button class="play-button" (click)="playVideo(message)"><ion-icon range-left name="play"  ></ion-icon>
+                        </button>
+                        <img [src]="_DomSanitizer.bypassSecurityTrustUrl(message.thumbnail)">
+                        <!--                        <video preload="auto" \>
+                                                    <source [src]="message.media" />
+                                                </video>-->
+                    </div>
+                    <ion-note  >{{ message.getDate() }}</ion-note>
+                </div>
+            </ion-col>
+
+            <!--audio-->
+            <ion-col *ngIf="message.type == 3">
+                <div class="message {{message.received == 0 ? 'message-right' : 'message-left'}}">
                     <div class="message-content">
-                        <div class="person-name">Woody</div>
-                        <ion-range [(ngModel)]="brightness">
-                            <ion-icon range-left name="play" (click)="play()"></ion-icon>
+                        <div class="person-name">{{ message.sender.name }}</div>
+                        <ion-range [(ngModel)]="message.seek">
+                            <ion-icon range-left name="play" (click)="play(message)"></ion-icon>
+                            <!--<ion-icon range-left name="stop" (click)="stop(message)" *ngIf="message.seek > 0"></ion-icon>-->
                         </ion-range>
                     </div>
-                    <ion-note  >3:43 pm</ion-note>
-                </div>
-            </ion-col>
-        </ion-row>
-        <ion-row  *ngFor="let message of messages">
-            <ion-col *ngIf="message.type != 'audio'">
-                <div class="message message-right" >
-                    <div class="message-content" >
-                        <div class="person-name">{{ message.sender }}</div>
-                        <p  > {{ message.body }}</p>
-                    </div>
-                    <ion-note  >{{ message.created_at }}</ion-note>
-                </div>
-            </ion-col>
-            <ion-col *ngIf="message.type == 'audio'">
-                <div class="message message-left">
-                    <div class="message-content">
-                        <div class="person-name">{{ message.sender }}</div>
-<!--                        <ion-range [(ngModel)]="message.media.seek">
-                            <ion-icon range-left name="play" (click)="play(message)"></ion-icon>
-                        </ion-range>-->
-                        <audiocomponent [voice]="message.media" ></audiocomponent>
-                    </div>
-                    <ion-note  >{{ message.created_at }}</ion-note>
+                    <ion-note  >{{ message.getDate() }}</ion-note>
                 </div>
             </ion-col>
         </ion-row>
@@ -64,14 +80,17 @@
             <div >
                 <ion-list>
                     <ion-item class="ion-item-input">
-                        <ion-icon name="happy" item-left color="primary" ></ion-icon>
+                        <!--<ion-icon name="happy" item-left color="primary" ></ion-icon>-->
                         <textarea [(ngModel)]="message" fz-elastic rows="1" placeholder="Scrivi un messaggio"></textarea>
-                        <ion-icon name="arrow-forward" item-right color="primary" (click)="send()"></ion-icon>
+                        <ion-icon name="arrow-forward" item-right color="primary" (click)="sendText()"></ion-icon>
                     </ion-item>
-                    <ion-item  class="ion-item-mic" (touchstart)="recordigStart()" (touchend)="recordigEnd()">
+                    <ion-item  class="ion-item-mic" (touchstart)="recordigStart()" (touchend)="stopRecording = true">
                         <ion-icon name="mic"  item-right color="light"></ion-icon>
                     </ion-item>
                 </ion-list>
+            </div>
+            <div class="time-recording" *ngIf="stopRecording">
+                <ion-icon name="mic"></ion-icon> {{time_recording}}
             </div>
         </div>
     </ion-toolbar>

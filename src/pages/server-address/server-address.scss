@@ -1,0 +1,24 @@
+page-server-address {
+    ion-content {
+
+        .logo-container {
+            text-align: center;
+
+            img {
+                width: 100%;
+                max-width: 180px;
+                height: auto;
+            }
+        }
+
+        ion-grid{
+            height: 100%;
+            justify-content: center;
+        }
+
+    }
+
+    .scroll-content {
+        padding-bottom:0!important;
+    }
+}

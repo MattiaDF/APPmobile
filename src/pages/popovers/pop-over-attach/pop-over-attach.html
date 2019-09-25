@@ -2,9 +2,10 @@
 
     <ion-list>
 <!--      <ion-list-header>Ionic</ion-list-header>-->
-      <button ion-item (click)="capturePhoto()"><ion-icon name="camera"></ion-icon> Foto </button>
-      <button ion-item (click)="close()"><ion-icon name="videocam"></ion-icon> Video </button>
-      <button ion-item (click)="close()"><ion-icon name="images"></ion-icon> Galleria </button>
+      <button ion-item (click)="close('foto')"><ion-icon name="camera"></ion-icon> Foto </button>
+      <button ion-item (click)="close('video')"><ion-icon name="videocam"></ion-icon> Video </button>
+      <button ion-item (click)="close('galleriaI')"><ion-icon name="images"></ion-icon> Galleria Immagini</button>
+      <!--<button ion-item (click)="close('galleriaV')"><ion-icon name="film"></ion-icon> Galleria Video </button>-->
     </ion-list>
 
 </ion-content>

@@ -1,0 +1,33 @@
+<ion-content padding class="main-background-image">
+    <ion-header no-border>
+        <ion-navbar>
+        </ion-navbar>
+    </ion-header>
+    <ion-grid>
+        <ion-row>
+            <ion-col class="my-form">
+                <div class="logo-container">
+                    <img src="assets/img/logo2.png" alt=""/>
+                </div>
+                <p text-center>
+                    Inserisci indirizzo server
+                </p>
+
+                <ion-list no-lines>
+                    <ion-item >
+                        <ion-label>Address</ion-label>
+                        <ion-input   [(ngModel)]="address" block></ion-input>
+                    </ion-item>
+                </ion-list>
+
+                <div class="buttons-container">
+                    <button ion-button block round icon-right (click)="registerAddress()" >
+                            SALVA
+                    </button>
+                </div>
+
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</ion-content>
